@@ -12,5 +12,5 @@ app.use('/api/auth', user);
 app.use(require('./middleware/validate-session'))
 app.use('/api/game', game);
 app.listen( PORT, function() {
-    console.log(`App is listening on ${PORT}`);
+	console.log(`App is listening on ${PORT}`);
 })
