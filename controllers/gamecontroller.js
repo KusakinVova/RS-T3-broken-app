@@ -8,16 +8,16 @@ router.get('/all', (req, res) => {
 				res.status(200).json({
 					games: games,
 					message: "Data fetched."
-				})
+				});
 			},
 
 			function findFail() {
 				res.status(500).json({
 					message: "Data not found"
-				})
+				});
 			}
-		)
-})
+		);
+});
 
 router.get('/:id', (req, res) => {
 	Game.findOne({ where: { id: req.params.id, owner_id: req.body.user.id } })
@@ -25,16 +25,16 @@ router.get('/:id', (req, res) => {
 			function findSuccess(game) {
 				res.status(200).json({
 					game: game
-				})
+				});
 			},
 
 			function findFail(err) {
 				res.status(500).json({
 					message: "Data not found."
-				})
+				});
 			}
-		)
-})
+		);
+});
 
 router.post('/create', (req, res) => {
 	Game.create({
@@ -50,14 +50,14 @@ router.post('/create', (req, res) => {
 				res.status(200).json({
 					game: game,
 					message: "Game created."
-				})
+				});
 			},
 
 			function createFail(err) {
-				res.status(500).send(err.message)
+				res.status(500).send(err.message);
 			}
-		)
-})
+		);
+});
 
 router.put('/update/:id', (req, res) => {
 	Game.update({
@@ -78,17 +78,17 @@ router.put('/update/:id', (req, res) => {
 				res.status(200).json({
 					game: game,
 					message: "Successfully updated."
-				})
+				});
 			},
 
 			function updateFail(err) {
 				res.status(500).json({
 					message: err.message
-				})
+				});
 			}
 
-		)
-})
+		);
+});
 
 router.delete('/remove/:id', (req, res) => {
 	Game.destroy({
@@ -102,15 +102,15 @@ router.delete('/remove/:id', (req, res) => {
 			res.status(200).json({
 				game: game,
 				message: "Successfully deleted"
-			})
+			});
 		},
 
 		function deleteFail(err) {
 			res.status(500).json({
 				error: err.message
-			})
+			});
 		}
-	)
-})
+	);
+});
 
 module.exports = router;
