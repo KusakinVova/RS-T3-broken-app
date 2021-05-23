@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../db').import('../models/user');
 
+const timetokenlife = 60 * 60 * 24;
+
 router.post('/signup', (req, res) => {
 	User.create({
 		full_name: req.body.user.full_name,
@@ -13,7 +15,7 @@ router.post('/signup', (req, res) => {
 	})
 		.then(
 			function signupSuccess(user) {
-				let token = jwt.sign({ id: user.id }, 'lets_play_sum_games_man', { expiresIn: 60 * 60 * 24 });
+				let token = jwt.sign({ id: user.id }, 'lets_play_sum_games_man', { expiresIn: timetokenlife });
 				res.status(200).json({
 					user: user,
 					token: token
@@ -31,7 +33,7 @@ router.post('/signin', (req, res) => {
 		if (user) {
 			bcrypt.compare(req.body.user.password, user.passwordHash, function (err, matches) {
 				if (matches) {
-					let token = jwt.sign({ id: user.id }, 'lets_play_sum_games_man', { expiresIn: 60 * 60 * 24 });
+					let token = jwt.sign({ id: user.id }, 'lets_play_sum_games_man', { expiresIn: timetokenlife });
 					res.json({
 						user: user,
 						message: "Successfully authenticated.",
