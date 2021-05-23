@@ -1,5 +1,5 @@
-var router = require('express').Router();
-var Game = require('../db').import('../models/game');
+const router = require('express').Router();
+const Game = require('../db').import('../models/game');
 
 router.get('/all', (req, res) => {
 	Game.findAll({ where: { owner_id: req.body.user.id } })
