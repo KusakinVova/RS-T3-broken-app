@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../db').import('../models/user');
+const StatusCodes = require('http-status-codes');
 
 module.exports = function (req, res, next) {
 	if (req.method == 'OPTIONS') {
@@ -17,11 +18,11 @@ module.exports = function (req, res, next) {
 						next();
 					},
 						function () {
-							res.status(401).send({ error: "not authorized" });
+							res.status(StatusCodes.UNAUTHORIZED).send({ error: "not authorized" });
 						})
 
 				} else {
-					res.status(400).send({ error: "not authorized" });
+					res.status(StatusCodes.BAD_REQUEST).send({ error: "not authorized" });
 				}
 			});
 		}
